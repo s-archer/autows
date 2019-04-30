@@ -1,0 +1,23 @@
+- name: PROVISION VPC SUBNETS & F5 INSTANCES
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+
+  vars_files:
+    - ../../creds/aws_creds.yaml
+
+  vars:
+
+    uri_method: POST
+
+  - name: Issue AS3 declaration
+    uri:
+      url: https://your.jira.example.com/rest/api/2/issue/
+      method: "{{uri_method}}"
+      user: "{{bigip_user}}"
+      password: "{{bigip_pass}}"
+      body: "{{ lookup('file','./as3-declarations/simple-as3.json') }}"
+      force_basic_auth: yes
+      status_code: 201
+      body_format: json
