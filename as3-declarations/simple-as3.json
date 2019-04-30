@@ -11,13 +11,13 @@
         "remark": "Simple HTTP Service with Round-Robin Load Balancing",
         "arch": {
             "class": "Tenant",
-            "archapp": {
+            "archapp2": {
                 "class": "Application",
                 "template": "http",
                 "serviceMain": {
                     "class": "Service_HTTP",
                     "virtualAddresses": [
-                        "10.99.1.10"
+                        "10.99.1.20"
                     ],
                     "pool": "web_pool"
                 },
@@ -30,8 +30,8 @@
                         {
                             "servicePort": 80,
                             "serverAddresses": [
-                                "192.99.1.10",
-                                "192.99.1.11"
+                                "192.99.1.21",
+                                "192.99.1.22"
                             ]
                         }
                     ]

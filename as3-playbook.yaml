@@ -5,19 +5,23 @@
 
 
   vars_files:
-    - ../../creds/aws_creds.yaml
+    - ../creds/big_creds.yaml
 
   vars:
 
     uri_method: POST
 
-  - name: Issue AS3 declaration
-    uri:
-      url: https://your.jira.example.com/rest/api/2/issue/
-      method: "{{uri_method}}"
-      user: "{{bigip_user}}"
-      password: "{{bigip_pass}}"
-      body: "{{ lookup('file','./as3-declarations/simple-as3.json') }}"
-      force_basic_auth: yes
-      status_code: 201
-      body_format: json
+  tasks:
+
+    - name: Issue AS3 declaration
+      uri:
+        url: https://3.9.55.150/mgmt/shared/appsvcs/declare
+        #url: https://10.1.1.245/mgmt/shared/appsvcs/declare
+        method: "{{uri_method}}"
+        user: "{{bigip_user}}"
+        password: "{{bigip_pass}}"
+        body: "{{ lookup('file','./as3-declarations/simple-as3.json') }}"
+        force_basic_auth: yes
+        body_format: json
+        validate_certs: no
+        status_code: 200
