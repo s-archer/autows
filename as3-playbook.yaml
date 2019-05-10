@@ -12,10 +12,10 @@
   tasks:
     - name: Issue AS3 declaration
       uri:
-        url: https://108.128.29.59/mgmt/shared/appsvcs/declare
-        method: "{{uri_method}}"
-        user: "{{bigip_user}}"
-        password: "{{bigip_pass}}"
+        url: https://18.220.128.189/mgmt/shared/appsvcs/declare
+        method: "{{ uri_method }}"
+        user: "{{ bigip_user }}"
+        password: "{{ bigip_pass }}"
         body: "{{ lookup('file','./as3-declarations/simple-as3.json') }}"
         force_basic_auth: yes
         body_format: json
