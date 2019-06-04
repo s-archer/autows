@@ -10,7 +10,7 @@
     uri_method: POST
 
   tasks:
-    - name: Issue AS3 declaration
+    - name: REST CALL TO BIG-IP
       uri:
         url: https://18.220.128.189/mgmt/shared/appsvcs/declare
         method: "{{ uri_method }}"
