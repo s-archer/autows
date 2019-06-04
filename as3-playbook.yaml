@@ -1,4 +1,4 @@
-- name: PROVISION VPC SUBNETS & F5 INSTANCES
+- name: DEPLOY AS3 DECLARATION
   hosts: localhost
   connection: local
   gather_facts: no
