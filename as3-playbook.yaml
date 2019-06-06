@@ -3,6 +3,28 @@
   connection: local
   gather_facts: no
 
+  vars:
+    
+    uri_method: POST
+
+  vars_files:
+    - ../creds/big_creds.yaml
+
+  tasks:
+
+  - name: Create a JIRA issue
+    uri:
+      url: https://10.1.1.245/mgmt/shared/appsvcs/declare/
+      user: "{{bigip_user}}"
+      password: "{{bigip_pass}}"
+      method: "{{uri_method}}"
+      body: "{{ lookup('file','issue.json') }}"
+      force_basic_auth: yes
+      status_code: 200
+      body_format: json
+      validate_certs: no
+
+
   vars_files:
     - ../creds/big_creds.yaml
 
@@ -16,7 +38,7 @@
         method: "{{ uri_method }}"
         user: "{{ bigip_user }}"
         password: "{{ bigip_pass }}"
-        body: "{{ lookup('file','./as3-declarations/simple-as3.json') }}"
+        body: "{{ lookup('file','./as3-dec.json') }}"
         force_basic_auth: yes
         body_format: json
         validate_certs: no
