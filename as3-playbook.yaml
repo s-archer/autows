@@ -1,3 +1,4 @@
+---
 - name: DEPLOY AS3 DECLARATION
   hosts: localhost
   connection: local
@@ -19,5 +20,5 @@
         body: "{{ lookup('file','./as3-dec.json') }}"
         force_basic_auth: yes
         body_format: json
-        validate_certs: no
         status_code: 200
+...
