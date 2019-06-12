@@ -21,4 +21,5 @@
         force_basic_auth: yes
         body_format: json
         status_code: 200
+        validate_certs: no
 ...
