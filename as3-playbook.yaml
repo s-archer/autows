@@ -4,11 +4,14 @@
   connection: local
   gather_facts: no
 
-  vars_files:
-    - ../creds/big_creds.yaml
 
   vars:
     uri_method: POST
+
+
+  vars_files:
+    - ../creds/big_creds.yaml
+
 
   tasks:
 
@@ -18,9 +21,14 @@
         method: "{{ uri_method }}"
         user: "{{ bigip_user }}"
         password: "{{ bigip_pass }}"
-        body: "{{ lookup('file','./simple-as3.json') }}"
+        body: "{{ lookup('file','./as3-declaration.json') }}"
         force_basic_auth: yes
         body_format: json
         status_code: 200
         validate_certs: no
+      register: as3_output
+
+    - name: DEBUG AS3 OUTPUT
+      debug:
+        msg: "MY AS3 OUTPUT {{ as3_output }}"
 ...
