@@ -17,7 +17,7 @@
 
     - name: REST CALL TO BIG-IP
       uri:
-        url: https://3.9.186.223/mgmt/shared/appsvcs/declare
+        url: https://3.9.51.94/mgmt/shared/appsvcs/declare
         method: "{{ uri_method }}"
         user: "{{ bigip_user }}"
         password: "{{ bigip_pass }}"
