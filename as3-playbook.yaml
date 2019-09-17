@@ -4,14 +4,11 @@
   connection: local
   gather_facts: no
 
-
   vars:
     uri_method: POST
 
-
   vars_files:
     - ../creds/big_creds.yaml
-
 
   tasks:
 
