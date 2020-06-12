@@ -1,31 +1,48 @@
 ---
-- name: DEPLOY AS3 DECLARATION
+- name: MY AS3 PLAYBOOK
   hosts: localhost
   connection: local
   gather_facts: no
 
   vars:
     uri_method: POST
+  
+  # vars_prompt:
+  #   - name: bigip_user
+  #     prompt: "enter the bigip username"
+  #     private: no
+  #   - name: bigip_pass
+  #     prompt: "enter the bigip password"
 
   vars_files:
-    - ../creds/big_creds.yaml
+  - ../creds/big_creds.yaml
 
   tasks:
 
-    - name: REST CALL TO BIG-IP
-      uri:
-        url: https://3.9.51.94/mgmt/shared/appsvcs/declare
-        method: "{{ uri_method }}"
-        user: "{{ bigip_user }}"
-        password: "{{ bigip_pass }}"
-        body: "{{ lookup('file','./as3-declaration.json') }}"
-        force_basic_auth: yes
-        body_format: json
-        status_code: 200
-        validate_certs: no
-      register: as3_output
+  - name: DEPLOY AS3 DECLARATION
+    uri:
+      url: https://18.132.233.22/mgmt/shared/appsvcs/declare
+      user: "{{ bigip_user }}"
+      password: "{{ bigip_pass }}"
+      method: "{{ uri_method }}"
+      body: "{{ lookup('file','as3-declaration.json') }}"
+      force_basic_auth: yes
+      status_code: 
+        - 200
+        - 204
+      body_format: json
+      validate_certs: no
+    register: as3_response 
 
-    - name: DEBUG AS3 OUTPUT
-      debug:
-        msg: "MY AS3 OUTPUT {{ as3_output }}"
+  - name: DEBUG OUT AS3 RESPONSE
+    debug:
+      msg: "{{ as3_response | to_nice_json }}"
+
+  - name: DEBUG OUT AS3 VIRTUAL IP
+    debug:
+      msg: "Here is the virtual IP: {{ as3_response.json.declaration.arch.arch_A1.app.virtualAddresses | to_nice_json }}"
+
+  - name: DEBUG ALL VARS
+    debug:
+      msg: "{{ vars }}"
 ...
